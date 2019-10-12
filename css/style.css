@@ -10,14 +10,15 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   color: #fff;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.7;
+  margin: 0;
+  padding-bottom: 10px;
 }
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  position: relative;
 }
 
 .section-title {
@@ -55,7 +56,6 @@ body {
   margin-right: 10px;
   padding: 40px;
   color: #ff3f34;
-  position: relative;
 }
 
 .sidebar a, .posts a {
@@ -70,7 +70,7 @@ body {
 /* Logo */
 .logo {
   font-family: "Libre Baskerville", serif;
-  font-weight: 400;
+  font-weight: 800;
   font-size: 80px;
   line-height: 1;
   text-align: center;
@@ -121,6 +121,12 @@ body {
 
 /* Media */
 @media (max-width: 800px) {
+  body {
+    font-size: 20px;
+  }
+  .logo {
+    font-size: 60px;
+  }
   .wrapper {
     -ms-flex-direction: column;
         flex-direction: column;
