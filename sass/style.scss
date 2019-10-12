@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Source+Sans+Pro:300&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville|Oswald|Source+Sans+Pro&display=swap');
 
 /* Variables */
 
-$color-light: #fff;
-$color-dark: #444;
+$color-main: #ff3f34;
+$color-compementary: #fff;
+$color-grey: #808e9b;
 
-$font-logo: 'Sacramento', cursive;
+
+$font-logo: 'Libre Baskerville', serif;
 $font-header: 'Oswald', sans-serif;
 $font-text: 'Source Sans Pro', sans-serif;
 
@@ -16,17 +18,18 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  background: $color-light;
+  background: $color-main;
   font-family: $font-text;
-  color: $color-dark;
+  color: $color-compementary;
   font-weight: 300;
   font-size: 16px;
   line-height: 1.7;
-}
+}   
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
+  position: relative;
 }
 
 .section-title {
@@ -37,7 +40,7 @@ body {
   span {
     text-transform: none;
     font-weight: 400;
-    color: lighten($color-dark, 20%);
+    color: lighten($color-compementary, 20%);
   }
 }
 
@@ -57,11 +60,19 @@ body {
 }
 
 .sidebar, .posts {
-  background: $color-light;
+  background: $color-compementary;
   margin-right: 10px;
   padding: 40px;
-  border: 1px solid $color-dark;
-  border-radius: 5px;
+  color: $color-main;
+  position: relative;
+
+  a {
+    color: $color-grey;
+    text-decoration: none;
+    &:hover {
+      color: $color-main;
+    }
+  }
 }
 
 /* Logo */
@@ -69,7 +80,7 @@ body {
 .logo {
   font-family: $font-logo;
   font-weight: 400;
-  font-size: 104px;
+  font-size: 80px;
   line-height: 1;
   text-align: center;
 }
@@ -82,6 +93,7 @@ body {
   padding: 0;
   .active {
     font-weight: bold;
+    color: $color-main;
   }
 }
 
@@ -101,6 +113,13 @@ body {
 
 /* Post */
 
+// .post {
+//   display: none;
+//   &.active {
+//     display: block;
+//   }
+// }
+
 .post {
   display: none;
   &.active {
@@ -118,3 +137,21 @@ body {
     margin: 0 10px 0 0;
   }
 }
+
+/* Media */
+
+@media (max-width: 800px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .posts {
+    margin-bottom: 20px;
+  }
+}
+
