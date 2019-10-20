@@ -26,7 +26,7 @@ body {
   line-height: 1.7;
   margin: 0;
   padding-bottom: 10px;
-}   
+}
 
 .container {
   max-width: 1140px;
@@ -131,6 +131,51 @@ body {
   }
 }
 
+/* Tags */
+
+.tag-size {
+
+  line-height: 1;
+  margin: 0;
+
+  &-1 {
+    font-size: 16px;
+  }
+
+  &-2 {
+    font-size: 18px;
+  }
+
+  &-3 {
+    font-size: 20px;
+  }
+
+  &-4 {
+    font-size: 22px;
+  }
+
+  &-5 {
+    font-size: 24px;
+  }
+}
+
+.tags li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.post-author {
+  font-style: italic;
+}
+
+.post-tags {
+  display: flex;
+  p {
+    margin: 0 10px 0 0;
+  }
+}
+
+
 /* Media */
 
 @media (max-width: 800px) {
@@ -151,7 +196,7 @@ body {
     margin-bottom: 20px;
     text-align: center;
   }
-  
+
   .posts {
     margin-bottom: 20px;
   }

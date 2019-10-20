@@ -119,6 +119,50 @@ body {
   margin: 0 10px 0 0;
 }
 
+/* Tags */
+.tag-size {
+  line-height: 1;
+  margin: 0;
+}
+
+.tag-size-1 {
+  font-size: 16px;
+}
+
+.tag-size-2 {
+  font-size: 18px;
+}
+
+.tag-size-3 {
+  font-size: 20px;
+}
+
+.tag-size-4 {
+  font-size: 22px;
+}
+
+.tag-size-5 {
+  font-size: 24px;
+}
+
+.tags li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.post-author {
+  font-style: italic;
+}
+
+.post-tags {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.post-tags p {
+  margin: 0 10px 0 0;
+}
+
 /* Media */
 @media (max-width: 800px) {
   body {
