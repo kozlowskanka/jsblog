@@ -163,6 +163,11 @@ body {
   margin: 0 10px 0 0;
 }
 
+/* Sidebar */
+.sidebar-tags {
+  margin-bottom: 40px;
+}
+
 /* Media */
 @media (max-width: 800px) {
   body {

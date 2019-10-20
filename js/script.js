@@ -37,9 +37,12 @@ const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
 const optArticleTagsSelector = '.post-tags .list';
 const optTagsSelector = '.post-tags .list a';
+const optSidebarTagsSelector = '.sidebar-tags .list a';
 const optArticleAuthorSelector = '.post-author';
 const optAuthorSelector = '.post-author a';
 const optTagsListSelector = '.tags.list';
+const optAuthorsListSelector = '.authors.list';
+const optSidebarAuthorsSelector = '.sidebar-authors .list a';
 const optCloudClassCount = 5;
 const optCloudClassPrefix = 'tag-size-';
 
@@ -173,7 +176,7 @@ function generateTags(){
   }
 
   /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector('.tags');
+  const tagList = document.querySelector(optTagsListSelector);
 
   /* [NEW] create variable for all links HTML code */
   const tagsParams = calculateTagsParams(allTags);
@@ -184,7 +187,7 @@ function generateTags(){
   for (let tag in allTags){
     console.log('object tag:', tag);
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li><a href="#tag-' + tag + '" ' + 'class="' + optCloudClassPrefix + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + ' </a></li>' ;
+    const tagLinkHTML = '<li><a href="#tag-' + tag + '" ' + 'class="' + optCloudClassPrefix + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>' ;
     console.log('tagLinkHTML:' + tagLinkHTML);
     allTagsHTML += tagLinkHTML;
 
@@ -262,11 +265,33 @@ function addClickListenersToTags(){
 addClickListenersToTags();
 
 
+function addClickListenersToSidebarTags(){
+
+  /* find all links to tags */
+  const linksToTags = document.querySelectorAll(optSidebarTagsSelector);
+  console.log('links to tags:', linksToTags);
+
+  /* START LOOP: for each link */
+  for (let linkToTag of linksToTags){
+    console.log('for each:', linkToTag);
+
+    /* add tagClickHandler as event listener for that link */
+    linkToTag.addEventListener('click', tagClickHandler);
+  /* END LOOP: for each link */
+  }
+}
+
+addClickListenersToSidebarTags();
+
+
 function generateAuthors(){
+
+  /* [NEW] create a new variable allTags with an empty object */
+   let allAuthors = {};
 
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
-  console.log('generate authors:', articles);
+  console.log('authors:', articles);
 
   /* START LOOP: for every article: */
   for(let article of articles){
@@ -274,7 +299,7 @@ function generateAuthors(){
 
     /* find author wrapper */
     const authorWrapper = article.querySelector(optArticleAuthorSelector);
-    console.log(authorWrapper);
+    console.log('authorWrapper:', authorWrapper);
 
     /* make html variable with empty string */
     let html = '';
@@ -285,19 +310,49 @@ function generateAuthors(){
 
     /* generate HTML for the author */
     const linkHTML = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
-    console.log(linkHTML);
+    console.log('linkHTML:', linkHTML);
 
     /* add generated code to html variable */
     html = html + linkHTML;
+
+    /* [NEW] check if this link is NOT already in allTags */
+    if(!allAuthors.hasOwnProperty(articleAuthor)){
+      /* [NEW] add tag to allTags object */
+      allAuthors[articleAuthor] = 1;
+    } else {
+      allAuthors[articleAuthor]++;
+    }
 
     /* insert author name into the author wrapper */
     authorWrapper.innerHTML = html;
 
   /* END LOOP: for every article: */
   }
+
+  /* [NEW] find list of authors in right column */
+  const authorList = document.querySelector(optAuthorsListSelector);
+
+  /* [NEW] create variable for all links HTML code */
+
+  let allAuthorsHTML = '';
+
+  /* [NEW] START LOOP: for each author in allAuthors */
+  for (let author in allAuthors){
+    console.log('author:', author);
+    /* [NEW] generate code of a link and add it to allAuthorssHTML */
+    const authorLinkHTML = '<li><a href="#author-' + author + '">' + author +'</a> (' + allAuthors[author] + ')</li>' ;
+    console.log('authorLinkHTML:', authorLinkHTML);
+    allAuthorsHTML += authorLinkHTML;
+
+  /* [NEW] END LOOP: for each author in allAuthors */
+  }
+  /* [NEW] add html from allAuthorsHTML to authorList */
+  authorList.innerHTML = allAuthorsHTML;
+
 }
 
 generateAuthors();
+
 
 function authorClickHandler(event){
   /* prevent default action for this event */
@@ -315,7 +370,7 @@ function authorClickHandler(event){
   const author = href.replace('#author-', '');
 
   /* find all author links with class active */
-  const activeAuthors = document.querySelectorAll('a.active[href^="#tag-"]');
+  const activeAuthors = document.querySelectorAll('a.active[href^="#author-"]');
 
   /* START LOOP: for each active author link */
   for(let activeAuthor of activeAuthors){
@@ -345,9 +400,9 @@ function addClickListenersToAuthors(){
 
   /* find all links to authors */
   const linksToAuthor = document.querySelectorAll(optAuthorSelector);
-  console.log('links to Author:', linksToAuthor);
+  console.log('links to authors:', linksToAuthor);
 
-  /* START LOOP: for each link */
+  /* START LOOP: for each author */
   for (let linkToAuthor of linksToAuthor){
     console.log('for each author:', linkToAuthor);
 
@@ -360,61 +415,24 @@ function addClickListenersToAuthors(){
 addClickListenersToAuthors();
 
 
-// function generateTags(){
-//   /* [NEW] create a new variable allTags with an empty array */
-//   let allTags = [];
+function addClickListenersToSidebarAuthors(){
 
-//   /* find all articles */
-//   const articles = document.querySelectorAll(optArticleSelector);
-//   console.log('generate tags:', articles);
+  /* find all links to authors */
+  const linksToAuthor = document.querySelectorAll(optSidebarAuthorsSelector);
+  console.log('links to Author:', linksToAuthor);
 
-//   /* START LOOP: for every article: */
-//   for(let article of articles){
-//     console.log('for each:', article);
+  /* START LOOP: for each link */
+  for (let linkToAuthor of linksToAuthor){
+    console.log('for each author:', linkToAuthor);
 
-//     /* find tags wrapper */
-//     const tagsWrapper = article.querySelector(optArticleTagsSelector);
-//     console.log(tagsWrapper);
+    /* add tagClickHandler as event listener for that link */
+    linkToAuthor.addEventListener('click', authorClickHandler);
+  /* END LOOP: for each link */
+  }
+}
 
-//     /* make html variable with empty string */
-//     let html = '';
+addClickListenersToSidebarAuthors();
 
-//     /* get tags from data-tags attribute */
-//     const articleTags = article.getAttribute('data-tags');
-//     console.log('data-tags:', articleTags);
 
-//     /* split tags into array */
-//     const articleTagsArray = articleTags.split(' ');
-//     console.log(articleTagsArray);
 
-//     /* START LOOP: for each tag */
-//     for(let tag of articleTagsArray){
-//       console.log('tag:', tag);
 
-//       /* generate HTML of the link */
-//       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
-//       console.log(linkHTML);
-
-//       /* add generated code to html variable */
-//       html = html + linkHTML;
-
-//       /* [NEW] check if this link is NOT already in allTags */
-//       if(allTags.indexOf(linkHTML) == -1){
-//         /* [NEW] add generated code to allTags array */
-//         allTags.push(linkHTML);
-//       }
-
-//     /* END LOOP: for each tag */
-//     }
-
-//     /* insert HTML of all the links into the tags wrapper */
-//     tagsWrapper.innerHTML = html;
-//   /* END LOOP: for every article: */
-//   }
-
-//   /* [NEW] find list of tags in right column */
-//   const tagList = document.querySelector('.tags');
-
-//   /* [NEW] add html from allTags to tagList */
-//   tagList.innerHTML = allTags.join(' ');
-// }
